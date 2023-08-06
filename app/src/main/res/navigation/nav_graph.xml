@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/breakking_news_fragment">
+
+    <fragment
+        android:id="@+id/breakking_news_fragment"
+        android:name="com.screens.fragment.BreakingNewsFragment"
+        android:label="fragment_breakking_news_fragment"
+        tools:layout="@layout/fragment_breakking_news_fragment">
+<!--        <action-->
+<!--            android:id="@+id/action_breakking_news_fragment_to_newsdetails_fragment"-->
+<!--            app:destination="@id/newsdetails_fragment" />-->
+<!--        <action-->
+<!--            android:id="@+id/action_breakking_news_fragment_to_businessFragment"-->
+<!--            app:destination="@id/businessFragment" />-->
+    </fragment>
+    <fragment
+        android:id="@+id/newsdetails_fragment"
+        android:name="com.screens.fragment.newsdetails_fragment"
+        android:label="fragment_newsdetails_fragment"
+        tools:layout="@layout/fragment_newsdetails_fragment" />
+    <fragment
+        android:id="@+id/businessFragment"
+        android:name="com.screens.fragment.BusinessFragment"
+        android:label="business_fragment"
+        tools:layout="@layout/fragment_breakking_news_fragment" >
+<!--        <action-->
+<!--            android:id="@+id/action_businessFragment_to_breakking_news_fragment"-->
+<!--            app:destination="@id/breakking_news_fragment" />-->
+    </fragment>
+</navigation>
