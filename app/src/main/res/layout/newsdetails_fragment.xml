@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="loadingBarStatus"
+            type="Integer" />
+
+        <variable
+            name="newsUrl"
+            type="String" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff"
+        tools:context="com.screens.fragment.BreakingNewsFragment">
+
+        <include
+            android:id="@+id/actionbarView"
+            android:layout_width="fill_parent"
+            layout="@layout/custom_action_bar"
+            android:layout_height="@dimen/_50sdp" />
+
+        <WebView
+            android:id="@+id/webview"
+            newsUrl="@{newsUrl}"
+            android:layout_below="@+id/actionbarView"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:visibility="@{loadingBarStatus}" />
+
+
+    </RelativeLayout>
+</layout>

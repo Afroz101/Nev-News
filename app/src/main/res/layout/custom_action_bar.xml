@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="tittleName"
+            type="String" />
+
+        <variable
+            name="customActionBar"
+            type="com.utlis.CustomActionBar" />
+
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/_50sdp"
+            android:background="@color/colorPrimary"
+            android:orientation="horizontal">
+
+
+            <ImageView
+                android:id="@+id/backbutton"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="fill_parent"
+                android:onClick="@{(View)-> customActionBar.backButtonClicked(View)}"
+                android:padding="@dimen/_10sdp"
+                android:src="@drawable/back_button" />
+
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginRight="@dimen/_50sdp"
+                android:gravity="center"
+                android:text="@{tittleName}"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_20sdp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="fill_parent"
+                android:padding="@dimen/_10sdp"
+                android:src="@drawable/back_button" />
+        </LinearLayout>
+
+    </RelativeLayout>
+</layout>

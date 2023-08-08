@@ -1,5 +1,7 @@
 package com.screens.activity
 
+import android.content.Intent
+
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -16,21 +18,20 @@ class BreakingNewsActivity :
     BaseActivity<ActivityBreakingNewsBinding>(R.layout.activity_breaking_news),
     OnItemSelectedListener {
 
-
     override fun init() {
         super.init()
-      binding.bottomNavigationView.setOnItemSelectedListener(this)
+        binding.bottomNavigationView.setOnItemSelectedListener(this)
 
     }
-
+//
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.home ->
                 findNavController(R.id.nag_host).navigate(R.id.breakking_news_fragment)
             R.id.business ->
-            findNavController(R.id.nag_host).navigate(R.id.businessFragment)
+                findNavController(R.id.nag_host).navigate(R.id.businessFragment)
         }
-        return  true
+        return true
 
     }
 

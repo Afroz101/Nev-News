@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
 
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -11,16 +10,25 @@
         android:orientation="vertical"
         tools:context="com.screens.fragment.BreakingNewsFragment">
 
-        <TextView
-            android:id="@+id/tittleName"
+
+        <include
+            android:id="@+id/actionbarView"
             android:layout_width="fill_parent"
-            android:layout_height="@dimen/_50sdp"
-            android:background="#063970"
-            android:gravity="center"
-            android:text="Breaking News"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_20sdp"
-            android:textStyle="bold" />
+            layout="@layout/custom_action_bar"
+            android:layout_height="@dimen/_50sdp" />
+
+        <!--        -->
+        <!--        <TextView-->
+        <!--            android:id="@+id/tittleName"-->
+        <!--            android:layout_width="fill_parent"-->
+        <!--            android:layout_height="@dimen/_50sdp"-->
+        <!--            android:background="#063970"-->
+        <!--            android:gravity="center"-->
+        <!--            android:text="Breaking News"-->
+        <!--            android:textColor="@color/white"-->
+        <!--            android:textSize="@dimen/_20sdp"-->
+        <!--            android:textStyle="bold" />-->
+
 
         <ProgressBar
             android:id="@+id/progressBar"
@@ -33,7 +41,7 @@
             android:id="@+id/breakingNewsRecyclerView"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_below="@+id/tittleName" />
+            android:layout_below="@+id/actionbarView" />
 
 
     </RelativeLayout>
