@@ -9,7 +9,6 @@
     <string name="Home">Home</string>
     <string name="Business">Business</string>
     <string name="Cricket">Cricket</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="Favorite">Favorite</string>
 
 </resources>

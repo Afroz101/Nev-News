@@ -1,39 +1,43 @@
 package com.screens.fragment
 
+//import com.di.DaggerFragmentComponent
+import android.R.attr.value
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.base.BaseFragment
-import com.di.ActivityModule
-import com.di.CustomActionBarModule
-import com.di.DaggerApplicationComponent
+import com.base.NevNewsApplication
+import com.db.respository.DataBaseImp
 import com.example.myapplication.R
 import com.example.myapplication.databinding.BreakkingNewsFragmentBinding
 import com.model.NewsResponse
 import com.repository.NewsRepository
-import com.screens.activity.NewsDetailActivity
-import com.screens.activity.Test
+import com.screens.activity.MainActivityActivity
 import com.screens.adapters.BreakingNewsAdapter
 import com.screens.adapters.LoaderAdapter
 import com.utlis.CustomActionBar
+import com.utlis.callbackinterface.OnBackButtonClicked
 import com.utlis.callbackinterface.setonItemClick
 import com.utlis.hide
 import com.utlis.show
 import com.viewmodel.NewsViewModel
 import com.viewmodel.viewmodelfactory.NewsViewModelFactory
-import retrofit2.Retrofit
 import javax.inject.Inject
 
+
 class BreakingNewsFragment :
-    BaseFragment<BreakkingNewsFragmentBinding>(R.layout.breakking_news_fragment), setonItemClick {
-//    private val mContext: Context? = null
+    BaseFragment<BreakkingNewsFragmentBinding>(R.layout.breakking_news_fragment),
+    setonItemClick {
+
+
+    @Inject
+    lateinit var dataBaseImp: DataBaseImp
 
     @Inject
     lateinit var breakingNewsAdapter: BreakingNewsAdapter
@@ -44,7 +48,7 @@ class BreakingNewsFragment :
     lateinit var newsRepository: NewsRepository
 
     @Inject
-    lateinit var newsRepository2: NewsRepository
+    lateinit var loaderAdapter: LoaderAdapter
 
     @Inject
     lateinit var customActionBar: CustomActionBar
@@ -52,20 +56,24 @@ class BreakingNewsFragment :
         super.onAttach(context)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        println("")
     }
 
     override fun init() {
         super.init()
 
-        builderDaggerComponent()
 
+
+        builderDaggerComponent()
         viewModel = ViewModelProvider(
             this,
             NewsViewModelFactory { NewsViewModel(newsRepository) })[NewsViewModel::class.java]
-
-
         setRecyclerAdapters()
         pageLoadListener()
         setActionbar()
@@ -83,10 +91,10 @@ class BreakingNewsFragment :
     private fun setRecyclerAdapters() {
 
         binding.breakingNewsRecyclerView.adapter = breakingNewsAdapter.withLoadStateHeaderAndFooter(
-            header = LoaderAdapter(), footer = LoaderAdapter()
+            header = loaderAdapter, footer = loaderAdapter
         )
         binding.breakingNewsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-
+        breakingNewsAdapter.setItemClickListener(this)
 
     }
 
@@ -110,31 +118,36 @@ class BreakingNewsFragment :
         }
     }
 
-    private fun builderDaggerComponent() {
-        DaggerApplicationComponent.factory().create(requireContext(), binding.actionbarView)
+    override fun builderDaggerComponent() {
+        val component = (activity?.application as NevNewsApplication).applicationComponent
+        component.getFragmentComponent().create(binding.actionbarView)
             .inject(this)
+
+//        DaggerFragmentComponent.factory().create(requireContext(), binding.actionbarView,component)
+//            .inject(this)
+
+
     }
 
     private fun setActionbar() {
-        customActionBar.setActionBar(getString(R.string.Home))
-        customActionBar.hideBackButton()
+        customActionBar.apply {
+            hideBackButton()
+            setActionBar(getString(R.string.Home))
+            showFavListIcon()
+            setActionbarBackPress(object : OnBackButtonClicked {
+                override fun backButtonClicked() {
+                }
+
+                override fun otherActionbarIconClick(view: View) {
+                    findNavController().navigate(R.id.favoriteFragment)
+                }
+            })
+        }
     }
 
-    override fun onNewsItemClicked(article: NewsResponse.Article) {
-//        val args = Bundle()
-//        args.putParcelable("USER", article)
-//        Navigation.findNavController(binding.root.rootView).navigate(R.id.test)
+    override fun onNewsItemClicked(article: NewsResponse.Article, context: Context) {
 
-//        val navController = findNavController()
-//        navController.navigate(R.id.action_fragment_to_target_activity)
-//        val intent = Intent (this@BreakingNewsFragment.context, NewsDetailActivity::class.java)
-//        startActivity(intent)
-
-//        requireActivity().run{
-        val args = Bundle()
-        args.putParcelable("USER", article)
-        Navigation.findNavController(binding.root).navigate(R.id.newsdetails_fragment, args)
-//        }
+        callNewsDetailFragment(article)
 
 
     }

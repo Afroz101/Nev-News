@@ -6,7 +6,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
-import com.bumptech.glide.R
+import com.example.myapplication.R
 
 
 @BindingAdapter("imageUrl")
@@ -14,7 +14,7 @@ fun ImageView.setImageFromUrl(imageUrl: String) {
     Glide.with(context)
         .load(imageUrl)
         .centerCrop()
-        .placeholder(R.drawable.abc_ic_clear_material)
+        .placeholder(R.drawable.image_not_available)
         .into(this);
 
 }

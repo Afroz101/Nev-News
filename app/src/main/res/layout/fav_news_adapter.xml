@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="favoriteNewsAdapter"
+            type="com.screens.adapters.FavoriteNewsAdapter" />
+
+        <variable
+            name="newsItem"
+            type="com.model.NewsResponse.Article" />
+
+    </data>
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> favoriteNewsAdapter.onItemClick(newsItem)}">
+
+
+        <RelativeLayout
+            android:id="@+id/l2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="@dimen/_60sdp"
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/userImageicon"
+                imageUrl="@{newsItem.urlToImage != null?newsItem.urlToImage:newsItem.url}"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:src="@drawable/ic_launcher_background"
+                app:riv_corner_radius="@dimen/_10sdp" />
+
+
+            <LinearLayout
+                android:id="@+id/ltextlayout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_toRightOf="@+id/userImageicon"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center|left"
+                    android:paddingTop="@dimen/_5sdp"
+                    android:text="@{newsItem.source.name}"
+                    android:textColor="@color/Black_50"
+                    android:textSize="@dimen/_10sdp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:autoLink="phone|web|email|map"
+                    android:gravity="center|left"
+                    android:paddingBottom="@dimen/_5sdp"
+                    android:text="@{newsItem.title}"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_15sdp"
+                    android:textStyle="normal"
+
+                    />
+
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_10sdp">
+
+
+                    <TextView
+                        android:id="@+id/date"
+                        customDate="@{newsItem.publishedAt}"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:autoLink="phone|web|email|map"
+                        android:gravity="center|right"
+
+                        android:textColor="@color/Black_50"
+                        android:textSize="@dimen/_10sdp"
+                        android:textStyle="normal" />
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/l2"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="#1A000000" />
+
+    </RelativeLayout>
+</layout>

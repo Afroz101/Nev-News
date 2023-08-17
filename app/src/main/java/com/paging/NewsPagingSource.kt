@@ -83,9 +83,9 @@ class NewsPagingSource (
        return when(pagingSourceType) {
             PagingSourceType.BREAKING_NEWS -> apiClient.getBreakingNews(pageNumber = position)
             PagingSourceType.BUSINESS -> apiClient.getBusinessNews(pageNumber = position)
-            PagingSourceType.CRICKET -> apiClient.getBusinessNews(pageNumber = position)
-
+            PagingSourceType.CRICKET -> apiClient.getCricket(pageNumber = position)
         }
+
     }
 }
 

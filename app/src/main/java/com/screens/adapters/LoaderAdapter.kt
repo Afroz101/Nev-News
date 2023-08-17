@@ -7,8 +7,9 @@ import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.databinding.LoaderIteamBinding
+import javax.inject.Inject
 
-class LoaderAdapter : LoadStateAdapter<LoaderAdapter.LoaderViewHolder>() {
+class LoaderAdapter @Inject constructor() : LoadStateAdapter<LoaderAdapter.LoaderViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, loadState: LoadState): LoaderViewHolder {
 
         val bind = LoaderIteamBinding.inflate(

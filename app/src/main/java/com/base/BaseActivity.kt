@@ -5,6 +5,7 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import com.google.android.material.snackbar.Snackbar
 
 abstract class BaseActivity<Binding : ViewDataBinding>( @LayoutRes private val layoutId: Int) : AppCompatActivity() {
     protected lateinit var binding: Binding
@@ -17,7 +18,10 @@ abstract class BaseActivity<Binding : ViewDataBinding>( @LayoutRes private val l
 
     open fun init() {}
     open fun observeViewModel(){}
+    fun showSnackbarMessage(message:String) {
+        Snackbar.make(binding.root, message, 5000).show()
 
+    }
 
 
 }

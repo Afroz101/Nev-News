@@ -34,7 +34,7 @@ class NewsRepository @Inject constructor(private val apiClient: ApiClient) {
     fun getBreakingNewsPag() = Pager(
         config = PagingConfig(ApiConstant.LIMIT.toInt(), maxSize = 100),
         pagingSourceFactory = {
-            NewsPagingSource(apiClient,PagingSourceType.BREAKING_NEWS)
+            NewsPagingSource(apiClient, PagingSourceType.BREAKING_NEWS)
 
         }
     ).liveData

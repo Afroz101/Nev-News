@@ -3,18 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="breakingNewsAdapter"
             type="com.screens.adapters.BreakingNewsAdapter" />
+
         <variable
             name="newsItem"
             type="com.model.NewsResponse.Article" />
+
     </data>
 
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:onClick="@{(view) -> breakingNewsAdapter.onItemClick(view,newsItem)}"
+        android:onClick="@{() -> breakingNewsAdapter.onItemClick(newsItem)}"
         android:layout_height="wrap_content">
 
 

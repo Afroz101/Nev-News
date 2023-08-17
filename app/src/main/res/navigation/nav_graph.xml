@@ -9,32 +9,35 @@
         android:id="@+id/breakking_news_fragment"
         android:name="com.screens.fragment.BreakingNewsFragment"
         android:label="fragment_breakking_news_fragment"
-        tools:layout="@layout/breakking_news_fragment">
+        tools:layout="@layout/breakking_news_fragment"></fragment>
 
-<!--        <action-->
-<!--            android:id="@+id/action_fragment_to_target_activity"-->
-<!--            app:destination="com.screens.activity.NewsDetailActivity" />-->
-
-        <!--        <action-->
-        <!--            android:id="@+id/action_breakking_news_fragment_to_newsdetails_fragment"-->
-        <!--            app:destination="@id/newsdetails_fragment" />-->
-        <!--        <action-->
-        <!--            android:id="@+id/action_breakking_news_fragment_to_businessFragment"-->
-        <!--            app:destination="@id/businessFragment" />-->
-    </fragment>
-    <fragment
-        android:id="@+id/newsdetails_fragment"
-        android:name="com.screens.activity.NewsDetailActivity"
-        android:label="fragment_newsdetails_fragment"
-        tools:layout="@layout/newsdetails_fragment" />
     <fragment
         android:id="@+id/businessFragment"
         android:name="com.screens.fragment.BusinessFragment"
         android:label="business_fragment"
         tools:layout="@layout/breakking_news_fragment">
-        <!--        <action-->
-        <!--            android:id="@+id/action_businessFragment_to_breakking_news_fragment"-->
-        <!--            app:destination="@id/breakking_news_fragment" />-->
+
     </fragment>
+
+    <fragment
+        android:id="@+id/cricketFragment"
+        android:name="com.screens.fragment.CricketFragment"
+        android:label="business_fragment"
+        tools:layout="@layout/breakking_news_fragment">
+
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.screens.fragment.favorite.FavoriteFragment"
+        android:label="favorite_fragment"
+        tools:layout="@layout/breakking_news_fragment" />
+
+    <fragment
+        android:id="@+id/newsDetailFragment"
+        android:name="com.screens.fragment.NewsDetailActivity"
+        android:label="favorite_fragment"
+        tools:layout="@layout/newsdetails_fragment" />
 
 </navigation>

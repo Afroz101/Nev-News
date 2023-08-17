@@ -1,20 +1,23 @@
 package com.screens.fragment
 
-import android.os.Bundle
+import android.content.Context
+import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.base.BaseFragment
 import com.base.NevNewsApplication
-import com.di.DaggerApplicationComponent
+//import com.di.DaggerFragmentComponent
 import com.example.myapplication.R
 import com.example.myapplication.databinding.BreakkingNewsFragmentBinding
 import com.model.NewsResponse
 import com.repository.BusinessRepository
+import com.screens.activity.MainActivityActivity
 import com.screens.adapters.BreakingNewsAdapter
 import com.screens.adapters.LoaderAdapter
+import com.utlis.CustomActionBar
+import com.utlis.callbackinterface.OnBackButtonClicked
 import com.utlis.callbackinterface.setonItemClick
 import com.utlis.hide
 import com.utlis.show
@@ -26,11 +29,16 @@ class BusinessFragment :
     BaseFragment<BreakkingNewsFragmentBinding>(R.layout.breakking_news_fragment), setonItemClick {
 
     @Inject
+    lateinit var customActionBar: CustomActionBar
+
+    @Inject
     lateinit var breakingNewsAdapter: BreakingNewsAdapter
+
     private lateinit var viewModel: BusinessViewModel
 
     @Inject
     lateinit var businessRepository: BusinessRepository
+
 
     override fun init() {
         super.init()
@@ -40,8 +48,10 @@ class BusinessFragment :
             this,
             NewsViewModelFactory { BusinessViewModel(businessRepository) }
         )[BusinessViewModel::class.java]
+
         setRecyclerAdapters()
         pageLoadListener()
+        setActionbar()
     }
 
     override fun observeViewModel() {
@@ -57,6 +67,8 @@ class BusinessFragment :
             footer = LoaderAdapter()
         )
         binding.breakingNewsRecyclerView.layoutManager = (LinearLayoutManager(requireContext()))
+        breakingNewsAdapter.setItemClickListener(this)
+
     }
 
     private fun pageLoadListener() {
@@ -79,15 +91,35 @@ class BusinessFragment :
         }
     }
 
-    private fun builderDaggerComponent() {
-        DaggerApplicationComponent.factory().create(requireContext(), binding.actionbarView)
-            .inject(this)
+
+    override fun builderDaggerComponent() {
+        val component = (activity?.application as NevNewsApplication).applicationComponent
+        component.getFragmentComponent().create(
+            binding.actionbarView
+        ).inject(this)
+//        DaggerFragmentComponent.factory().create(requireContext(), binding.actionbarView,component)
+//            .inject(this)
+
+
     }
 
-    override fun onNewsItemClicked(article: NewsResponse.Article) {
-        val args = Bundle()
-        args.putParcelable("USER", article)
-        Navigation.findNavController(binding.root).navigate(R.id.newsdetails_fragment, args)
+    private fun setActionbar() {
+        customActionBar.setActionBar(getString(R.string.Business))
+        customActionBar.showBackButton()
+        customActionBar.setActionbarBackPress(object : OnBackButtonClicked {
+            override fun backButtonClicked() {
+                (activity as MainActivityActivity).onBackPressed()
+            }
+
+            override fun otherActionbarIconClick(view: View) {
+            }
+        });
+    }
+
+    override fun onNewsItemClicked(article: NewsResponse.Article, context: Context) {
+        callNewsDetailFragment(article)
+
+
     }
 
 

@@ -11,26 +11,6 @@ import javax.inject.Inject
 
 class BusinessRepository @Inject constructor(private val apiClient: ApiClient) {
 
-//    private val breakingNewsLiveData = MutableLiveData<NetworkResult<NewsResponse>>()
-//    val breakingNews: LiveData<NetworkResult<NewsResponse>>
-//    get() = breakingNewsLiveData
-
-//    suspend fun getBreakingNews() {
-//        breakingNewsLiveData.postValue(NetworkResult.Loading())
-//        val response = apiClient.getBreakingNews()
-//        if (response.isSuccessful && response.body() != null) {
-//            breakingNewsLiveData.postValue(NetworkResult.Success(response.body()!!))
-//            println(response.body())
-//        } else if (response.errorBody() != null) {
-//            val errorObj = JSONObject(response.errorBody()!!.charStream().readText())
-//            breakingNewsLiveData.postValue(NetworkResult.Error(errorObj.getString("message")))
-//        } else {
-//            breakingNewsLiveData.postValue(NetworkResult.Error("Error"))
-//
-//        }
-//    }
-
-
     fun getBusinessNews() =
         Pager(
         config = PagingConfig(ApiConstant.LIMIT.toInt(), maxSize = 100),

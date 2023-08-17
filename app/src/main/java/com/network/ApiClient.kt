@@ -29,6 +29,18 @@ interface ApiClient {
         category: String = "business"
 
     ): Response<NewsResponse>
+    @GET("v2/top-headlines")
+    suspend fun getCricket(
+        @Query("country")
+        countryCode: String = "in",
+        @Query("page")
+        pageNumber: Int = 0,
+        @Query("apiKey")
+        apiKey: String = ApiConstant.API_KEY,
+        @Query("category")
+        category: String = "sport"
+
+    ): Response<NewsResponse>
 
 
 }
